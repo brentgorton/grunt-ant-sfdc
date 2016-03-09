@@ -1,18 +1,19 @@
 <project name="Grunt Salesforce Ant Deploy" default="deploy" xmlns:sf="antlib:com.salesforce">
 
   <target name="deploy">
-    <sf:deploy 
-      <% if(sessionid) { %> 
+    <sf:deploy
+      <% if(sessionid) { %>
       sessionId="<%= sessionid %>"
       <% } else { %>
-      username="<%= user %>" 
+      username="<%= user %>"
       password="<%= pass %>"
       <% } %>
-      serverurl="<%= serverurl %>" 
-      maxPoll="<%= maxPoll %>" 
-      pollWaitMillis="<%= pollWaitMillis %>" 
-      deployroot="<%= root %>" 
-      checkonly="<%= checkOnly %>" 
+      serverurl="<%= serverurl %>"
+      maxPoll="<%= maxPoll %>"
+      pollWaitMillis="<%= pollWaitMillis %>"
+      deployroot="<%= root %>"
+      purgeOnDelete="true"
+      checkonly="<%= checkOnly %>"
       runAllTests="<%= runAllTests %>"
       rollbackOnError="<%= rollbackOnError %>">
       <% _.forEach(tests, function(t) { %><runTest><%= t %></runTest><% }); %>
