@@ -10,6 +10,7 @@
 
 var path     = require('path');
 var metadata = require('../lib/metadata.json');
+var sfdcAuth = require('./sfdc-auth');
 var localTmp = path.resolve(__dirname, '../tmp');
 var localAnt = path.resolve(__dirname, '../ant');
 var localLib = path.resolve(__dirname, '../deps');
@@ -55,22 +56,6 @@ module.exports = function(grunt) {
     grunt.file.mkdir(localTmp);
     grunt.file.mkdir(path.join(localTmp,'/ant'));
     grunt.file.mkdir(path.join(localTmp,'/src'));
-  }
-
-  function parseAuth(options, target) {
-    var un = (!options.useEnv) ? options.user  : process.env.SFUSER;
-    var pw = (!options.useEnv) ? options.pass  : process.env.SFPASS;
-    var tk = (!options.useEnv) ? options.token : process.env.SFTOKEN;
-    if(tk) {pw += tk;}
-    if(!un) { grunt.log.error('no username specified for ' + target); }
-    if(!pw) { grunt.log.error('no password specified for ' + target); }
-    if(!un || !pw) {grunt.fail.warn('username/password error');}
-    options.user = un;
-    options.pass = pw;
-    if(options.useEnv && process.env.SFSERVERURL) {
-      options.serverurl = process.env.SFSERVERURL;
-    }
-    grunt.log.writeln('User -> ' + options.user.green);
   }
 
   function runAnt(task, target, done) {
@@ -145,6 +130,7 @@ module.exports = function(grunt) {
       user: false,
       pass: false,
       token: false,
+      sessionid: false,
       root: './build',
       apiVersion: '29.0',
       serverurl: 'https://login.salesforce.com',
@@ -159,7 +145,7 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('Deploy Target -> ' + target);
 
-    parseAuth(options, target);
+    sfdcAuth.parseAuth(options, target);
 
     options.root = path.normalize(options.root);
 
@@ -197,6 +183,7 @@ module.exports = function(grunt) {
       user: false,
       pass: false,
       token: false,
+      sessionid: false,
       root: './build',
       apiVersion: '29.0',
       serverurl: 'https://login.salesforce.com',
@@ -210,7 +197,7 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('Destroy Target -> ' + target);
 
-    parseAuth(options, target);
+    sfdcAuth.parseAuth(options, target);
 
     options.root = path.normalize(options.root);
 
@@ -248,6 +235,7 @@ module.exports = function(grunt) {
       user: false,
       pass: false,
       token: false,
+      sessionid: false,
       root: './build',
       apiVersion: '29.0',
       serverurl: 'https://login.salesforce.com',
@@ -259,7 +247,7 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('Retrieve Target -> ' + target);
 
-    parseAuth(options, target);
+    sfdcAuth.parseAuth(options, target);
 
     options.root = path.normalize(options.root);
 
@@ -271,7 +259,9 @@ module.exports = function(grunt) {
 
     if (!options.existingPackage) {
       var packageXml = buildPackageXml(this.data.pkg, this.data.pkgName, options.apiVersion);
-      grunt.file.write(path.join(options.root,'/package.xml'), packageXml);
+      var rootPackagePath = path.join(options.root,'/package.xml');
+      grunt.file.write(rootPackagePath, packageXml);
+      grunt.file.copy(rootPackagePath, path.join(localTmp,'/package.xml'));
     } else {
       if(grunt.file.exists(options.root,'/package.xml')){
         grunt.file.copy(path.join(options.root,'/package.xml'), path.join(localTmp,'/package.xml'));
@@ -303,6 +293,7 @@ module.exports = function(grunt) {
       user: false,
       pass: false,
       token: false,
+      sessionid: false,
       apiVersion: '29.0',
       serverurl: 'https://login.salesforce.com',
       resultFilePath: '',
@@ -317,7 +308,7 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('Describe Target -> ' + target);
 
-    parseAuth(options, target);
+    sfdcAuth.parseAuth(options, target);
 
     var buildFile = grunt.template.process(template, { data: options });
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);
@@ -397,6 +388,7 @@ module.exports = function(grunt) {
       user: false,
       pass: false,
       token: false,
+      sessionid: false,
       apiVersion: '29.0',
       serverurl: 'https://login.salesforce.com',
       resultFilePath: '',
@@ -413,7 +405,7 @@ module.exports = function(grunt) {
 
     grunt.log.writeln('ListMetadata (' + options.metadataType + ') Target -> ' + target);
 
-    parseAuth(options, target);
+    sfdcAuth.parseAuth(options, target);
 
     var buildFile = grunt.template.process(template, { data: options });
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);

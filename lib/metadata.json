@@ -4,6 +4,21 @@
     "folder": "opportunitySharingRules",
     "allowStar": true
   },
+  "auradefinitionbundle": {
+    "xmlType": "AuraDefinitionBundle",
+    "folder": "aura",
+    "allowStar": true
+  },
+  "corswhitelistorigins": {
+    "xmlType": "CorsWhitelistOrigin",
+    "folder": "corsWhitelistOrigins",
+    "allowStar": true
+  },
+  "quickactions": {
+    "xmlType": "QuickAction",
+    "folder": "quickActions",
+    "allowStar": true
+  },
   "ownerrules": {
     "xmlType": "ownerRules",
     "folder": "opportunitySharingRules",
@@ -42,6 +57,11 @@
   "apextrigger": {
     "xmlType": "ApexTrigger",
     "folder": "triggers",
+    "allowStar": true
+  },
+  "approvalprocess": {
+    "xmlType": "ApprovalProcess",
+    "folder": "approvalProcesses",
     "allowStar": true
   },
   "assignmentrules": {
@@ -87,6 +107,11 @@
   "customlabels": {
     "xmlType": "CustomLabels",
     "folder": "labels",
+    "allowStar": true
+  },
+  "custommetadata": {
+    "xmlType": "CustomMetadata",
+    "folder": "customMetadata",
     "allowStar": true
   },
   "customobject": {
@@ -157,6 +182,11 @@
   "flow": {
     "xmlType": "Flow",
     "folder": "flows",
+    "allowStar": true
+  },
+  "flowdefinition": {
+    "xmlType": "FlowDefinition",
+    "folder": "flowDefinitions",
     "allowStar": true
   },
   "folder": {
@@ -295,7 +325,7 @@
     "allowStar": true
   },
   "weblink": {
-    "xmlType": "Weblink",
+    "xmlType": "WebLink",
     "folder": "objects",
     "allowStar": false
   },
@@ -316,6 +346,11 @@
   },
   "workflowalert": {
     "xmlType": "WorkflowAlert",
+    "folder": "workflows",
+    "allowStar": false
+  },
+  "workflowflowaction": {
+    "xmlType": "WorkflowFlowAction",
     "folder": "workflows",
     "allowStar": false
   },
