@@ -6,7 +6,7 @@
     <sf:deploy username="${SFUSER}" password="${SFPASS}" 
       serverurl="${SERVERURL}" deployroot="${ROOT}" 
       checkonly="${CHECKONLY}" runAllTests="${RUNALLTESTS}"
-      rollbackOnError="${ROLLBACK}">
+      rollbackOnError="${ROLLBACK}" testLevel="RunLocalTests">
     </sf:deploy>
   </target>
 
