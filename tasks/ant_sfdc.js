@@ -140,7 +140,8 @@ module.exports = function(grunt) {
       runAllTests: false,
       rollbackOnError: true,
       useEnv: false,
-      existingPackage: false
+      existingPackage: false,
+      testLevel : 'RunLocalTests'
     });
 
     grunt.log.writeln('Deploy Target -> ' + target);
