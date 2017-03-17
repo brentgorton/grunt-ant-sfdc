@@ -15,7 +15,6 @@
       purgeOnDelete="true"
       checkonly="<%= checkOnly %>"
       runAllTests="<%= runAllTests %>"
-      testLevel="<%= testLevel %>"
       rollbackOnError="<%= rollbackOnError %>">
       <% _.forEach(tests, function(t) { %><runTest><%= t %></runTest><% }); %>
     </sf:deploy>
