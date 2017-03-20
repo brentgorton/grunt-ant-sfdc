@@ -150,21 +150,10 @@ module.exports = function(grunt) {
 
     options.root = path.normalize(options.root);
     options.tests = this.data.options.tests || [];
-    grunt.log.writeln('grunt-ant-sfdc');
-    grunt.log.writeln(JSON.stringify(this.data.tests));
-    grunt.log.writeln(JSON.stringify(this.data));
     if(options.tests != []){
       options.testLevel = 'RunSpecifiedTests';
     }
-    /*
-    var testsToRun = '';
-    for(var i = 0; i<this.data.tests.length; i++){
-     testsToRun += '<runTest>' + this.data.tests[i] + '</runTest>'; 
-    }
-    grunt.log.writeln(testsToRun);
-    */
     var buildFile = grunt.template.process(template, { data: options });
-    grunt.log.write(buildFile);
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);
 
     if (!options.existingPackage) {
