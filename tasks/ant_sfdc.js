@@ -149,14 +149,15 @@ module.exports = function(grunt) {
     sfdcAuth.parseAuth(options, target);
 
     options.root = path.normalize(options.root);
-
     options.tests = this.data.tests || [];
-    if(options.tests != []){
+    grunt.log.writeln('grunt-ant-sfdc');
+    grunt.log.writeln(JSON.stringify(this.data.tests));
+    if(this.data.tests != []){
       options.testLevel = 'RunSpecifiedTests';
     }
     var testsToRun = '';
-    for(var i = 0; i<options.tests.length; i++){
-     testsToRun += '<runTest>' + options.tests[i] + '</runTest>'; 
+    for(var i = 0; i<this.data.tests.length; i++){
+     testsToRun += '<runTest>' + this.data.tests[i] + '</runTest>'; 
     }
     grunt.log.writeln(testsToRun);
     var buildFile = grunt.template.process(template, { data: options });
