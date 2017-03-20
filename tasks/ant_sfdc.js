@@ -141,7 +141,7 @@ module.exports = function(grunt) {
       rollbackOnError: true,
       useEnv: false,
       existingPackage: false,
-      testLevel : 'RunLocalTests'
+      testLevel : (this.data.options.runAllTests ? 'RunLocalTests' : 'NoTestRun')
     });
 
     grunt.log.writeln('Deploy Target -> ' + target);
