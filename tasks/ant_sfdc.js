@@ -152,6 +152,7 @@ module.exports = function(grunt) {
     options.tests = this.data.tests || [];
     grunt.log.writeln('grunt-ant-sfdc');
     grunt.log.writeln(JSON.stringify(this.data.tests));
+    grunt.log.writeln(JSON.stringify(this.data));
     if(this.data.tests != []){
       options.testLevel = 'RunSpecifiedTests';
     }
