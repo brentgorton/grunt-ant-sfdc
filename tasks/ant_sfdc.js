@@ -154,7 +154,11 @@ module.exports = function(grunt) {
     if(options.tests != []){
       options.testLevel = 'RunSpecifiedTests';
     }
-
+    var testsToRun = '';
+    for(var i = 0; i<options.tests.length; i++){
+     testsToRun += '<runTest>' + options.tests[i] + '</runTest>'; 
+    }
+    grunt.log.writeln(testsToRun);
     var buildFile = grunt.template.process(template, { data: options });
     grunt.log.write(buildFile);
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);
