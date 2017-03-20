@@ -149,10 +149,10 @@ module.exports = function(grunt) {
     sfdcAuth.parseAuth(options, target);
 
     options.root = path.normalize(options.root);
-    options.tests = this.data.options.tests || [];
+    options.tests = [];/*this.data.options.tests || [];
     if(options.tests != []){
       options.testLevel = 'RunSpecifiedTests';
-    }
+    }*/
     var buildFile = grunt.template.process(template, { data: options });
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);
 
