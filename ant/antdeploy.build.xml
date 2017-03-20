@@ -9,6 +9,7 @@
       password="<%= pass %>"
       <% } %>
       serverurl="<%= serverurl %>"
+        singlePackage="true"
       maxPoll="<%= maxPoll %>"
       pollWaitMillis="<%= pollWaitMillis %>"
       deployroot="<%= root %>"
