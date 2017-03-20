@@ -156,6 +156,7 @@ module.exports = function(grunt) {
     }
 
     var buildFile = grunt.template.process(template, { data: options });
+    grunt.log.write(buildFile);
     grunt.file.write(path.join(localTmp,'/ant/build.xml'), buildFile);
 
     if (!options.existingPackage) {
